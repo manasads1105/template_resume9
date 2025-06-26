@@ -37,7 +37,10 @@ export default function App() {
       "Excellent communication and leadership skills",
       "Quick adaptability to new tech stacks",
       "Time management and multi-tasking",
-      "Team collaboration and Agile participation"
+      "Team collaboration and Agile participation",
+      "Leadership during sprint cycles and project demos",
+      "Collaboration in Agile teams using Jira and Git",
+      "Quick adaptation to new frameworks and workflows"
     ],
     education: [
       "B.Tech in Computer Science & Engineering, PES University, Bangalore (2021-2025)",
@@ -76,34 +79,36 @@ export default function App() {
     setResumeData((prev) => ({ ...prev, [key]: value }));
   };
 
-  const handleDownload = () => {
-    const element = document.getElementById("resume");
-    html2pdf()
-      .set({
-        margin: 0.5,
-        filename: "resume.pdf",
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-      })
-      .from(element)
-      .save();
+  const downloadOrSavePDF = (filename) => {
+  window.scrollTo(0, 0); // 
+
+  const element = document.getElementById("resume");
+
+  const opt = {
+    margin: 0,
+    filename,
+    html2canvas: {
+      scale: 3,
+      useCORS: true,
+      scrollX: 0,
+      scrollY: 0,
+      windowWidth: 1080,
+      windowHeight: 1500,
+    },
+    jsPDF: {
+      unit: "px",
+      format: [1080, 1500],
+      orientation: "portrait",
+    },
+    pagebreak: { mode: ["avoid-all", "css", "legacy"] },
   };
 
-  const handleSave = () => {
-    const element = document.getElementById("resume");
-    html2pdf()
-      .set({
-        margin: 0.5,
-        filename: "resume_saved.pdf",
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-      })
-      .from(element)
-      .save()
-      .then(() => {
-        alert("Resume saved as PDF (resume_saved.pdf)!");
-      });
-  };
+  html2pdf().set(opt).from(element).save();
+};
+
+const handleDownload = () => downloadOrSavePDF("resume.pdf");
+const handleSave = () => downloadOrSavePDF("resume_saved.pdf");
+
 
   const handleAIEnhance = (section, index = null) => {
     const enhancements = {
@@ -165,7 +170,7 @@ export default function App() {
   };
 
   const handleColorChange = () => {
-    const colors = ["bg-white", "bg-gray-500", "bg-blue-900", "bg-yellow-900"];
+    const colors = ["bg-white", "bg-gray-50", "bg-blue-50", "bg-yellow-50"];
     const currentIndex = colors.indexOf(resumeBgColor);
     const nextColor = colors[(currentIndex + 1) % colors.length];
     setResumeBgColor(nextColor);
