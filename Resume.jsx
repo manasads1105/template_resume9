@@ -25,6 +25,12 @@ const SectionList = ({ icon: Icon, title, items, onChange, onAdd, onRemove, isEd
             className="w-full border border-gray-300 p-2 rounded bg-white text-black"
             rows={2}
           />
+          <button
+            onClick={() => onRemove(index)}
+            className="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 transition"
+          >
+            Remove
+          </button>
         </div>
       ) : (
         <p key={index} className="text-gray-900 mb-1">
@@ -39,12 +45,6 @@ const SectionList = ({ icon: Icon, title, items, onChange, onAdd, onRemove, isEd
           className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
         >
           + Add {title}
-        </button>
-        <button
-          onClick={() => onRemove(items.length - 1)}
-          className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
-        >
-          - Remove
         </button>
       </div>
     )}
@@ -95,8 +95,9 @@ export default function Resume({ data, onChange, isEditing, fontClass, profileIm
       className={`w-full max-w-screen-xl mx-auto p-5 rounded-lg shadow-md border border-black min-h-screen overflow-auto text-black ${fontClass} ${bgColor}`}
       style={{
         width: "1080px",
-        minHeight: "1123px",
-        boxShadow: "10 10 10px rgba(0,0,0,0.1)",
+        padding: "15px",
+        margin: "0 auto",
+        boxSizing: "border-box",
         pageBreakInside: "avoid",
       }}
     >
